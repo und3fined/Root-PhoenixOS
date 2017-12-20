@@ -19,7 +19,7 @@ _x86 () {
 sleep 0.2
 echo "   [#] Installing SuperSU (x86).."
 cd $SUBIN
-[ -f su ] || rm -f su
+if [ -f su ]; then rm -f su; fi
 cp $SU/x86/su.pie su
 chmod 4751 su
 su --install
@@ -30,7 +30,7 @@ _x64 () {
 sleep 0.2
 echo "   [#] Installing SuperSU (x64)..."
 cd $SUBIN
-[ -f su ] || rm -f su
+if [ -f su ]; then rm -f su; fi
 cp $SU/x64/su .
 chmod 4751 su
 su --install
@@ -40,8 +40,7 @@ su --daemon
 sleep 1.2
 echo
 echo "   [#] Preparing..."
-[ -d $SU] || rm -rf $SU
-[ !-d $SU ] || mkdir -p $SU
+if [ !-d $SU ]; then mkdir -p $SU; else rm -rf $SU; fi
 
 echo "   [#] Downloading SuperSU, please wait..."
 sleep 0.5
@@ -53,18 +52,12 @@ unzip -qd $SU su.zip 2> /dev/null
 
 MD5SUM="8755c94775431f20bd8de368a2c7a179  $SU/su.zip"
 FILE_MD5SUM=$(md5sum $SU/su.zip)
-
-
-[ $MD5SUM != $DOWNLOAD_MD5SUM ] || echo "   [#] File Error..."; exit
+if [ $MD5SUM != $DOWNLOAD_MD5SUM ]; then echo "   [#] File Error..."; exit; fi
 
 ARCH=$(uname -m)
-if [ "$ARCH" = "x86_64" ]; then
-	_x64
-else
-	_x86
-fi
+if [ $ARCH = x86_64 ]; then _x64; else _x86; fi
 
-pm install $SU/common/Superuser.apk &> /dev/null
+pm install $SU/common/Superuser.apk 2> /dev/null
 rm -rf $SU
 sleep 1
 echo "   [#] SuperSU successfully installed."
