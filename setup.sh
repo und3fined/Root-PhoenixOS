@@ -1,76 +1,64 @@
 #!/system/bin/sh
 sleep 0.5
 clear
-echo "     ___      ____        "
-echo "    / _ \___ / / /_______ "
-echo "   / // / -_)_  _/ __/ -_)"
-echo "  /____/\__/ /_/ \__/\__/ "
-echo "                          "
-echo " Root PhoenixOS"
-echo " deace.inc@gmail.com"
-echo " https://github.com/De4ce/Root-PhoenixOS"
+echo "   ____             _     ____  _                      _       ___  ____  "
+echo "  |  _ \ ___   ___ | |_  |  _ \| |__   ___   ___ _ __ (_)_  __/ _ \/ ___| "
+echo "  | |_) / _ \ / _ \| __| | |_) | '_ \ / _ \ / _ \ '_ \| \ \/ / | | \___ \ "
+echo "  |  _ < (_) | (_) | |_  |  __/| | | | (_) |  __/ | | | |>  <| |_| |___) |"
+echo "  |_| \_\___/ \___/ \__| |_|   |_| |_|\___/ \___|_| |_|_/_/\_\\___/|____/ "
+echo
+echo "  Root PhoenixOS v1.01 by Aditya Pratama"
+echo "  deace.inc@gmail.com"
+echo "  https://github.com/De4ce/Root-PhoenixOS"
 
-su_path=/storage/emulated/0/de4ce/su
+SU=/storage/emulated/0/de4ce
+SUBIN=/system/xbin
+
+_x86 () {
+sleep 0.2
+echo "   [#] Installing SuperSU (x86).."
+cd $SUBIN
+rm -f su
+cp $SU/x86/su.pie su
+chmod 4751 su
+su --install
+su --daemon
+}
+
+_x64 () {
+sleep 0.2
+echo "   [#] Installing SuperSU (x64)..."
+cd $SUBIN
+rm -f su
+cp $SU/x64/su .
+chmod 4751 su
+su --install
+su --daemon
+}
 
 sleep 1.2
-
-# memulai instalasi
 echo
-echo "  - Preparing..."
-cd /storage/emulated/0
+echo "   [#] Preparing..."
+[ -d $SU] || rm -rf $SU
+[ !-d $SU ]] mkdir -p $SU
 
-if [ -d "de4ce" ]; then
-	rm -rf de4ce
-fi
-
-# membuat folder de4ce
-mkdir de4ce
-cd de4ce
-
-# mengunduh supersu
+echo "   [#] Downloading SuperSU, please wait..."
 sleep 0.5
-echo "  - Downloading SuperSU, please wait..."
-wget -q http://phoenix.de4ce.gq/su.zip
-mkdir su
+wget -qP $SU http://phoenix.de4ce.gq/su.zip
 
-# extracting su.zip
-echo "  - Extracting..."
-unzip su.zip -d su &> /dev/null
-
-# instal supersu
+echo "   [#] Extracting zip..."
 sleep 0.2
-echo "  - Installing SuperSU..."
-
-# x86 function
-exe_x86 () {
-cd /system/xbin
-mv su su.bak
-cp $su_path/x86/su.pie su
-chmod 4751 su
-su --install
-su --daemon
-}
-
-# x64 funcion
-exe_x64 () {
-cd /system/xbin
-mv su su.bak
-cp $su_path/x64/su .
-chmod 4751 su
-su --install
-su --daemon
-}
+unzip -qd $SU su.zip
 
 ARCH=$(uname -m)
 if [ "$ARCH" = "x86_64" ]; then
-	exe_x64
+	_x64
 else
-	exe_x86
+	_x86
 fi
 
-# instal supersu.apk
-pm install $su_path/common/Superuser.apk &> /dev/null
-rm -rf /storage/emulated/0/de4ce
+pm install $SU/common/Superuser.apk &> /dev/null
+rm -rf $SU
 sleep 1
-echo "  - SuperSU successfully installed."
+echo "   [#] SuperSU successfully installed."
 exit
