@@ -40,7 +40,7 @@ sleep 1.2
 echo
 echo "   [#] Preparing..."
 [ -d $SU] || rm -rf $SU
-[ !-d $SU ]] mkdir -p $SU
+[ !-d $SU ] || mkdir -p $SU
 
 echo "   [#] Downloading SuperSU, please wait..."
 sleep 0.5
