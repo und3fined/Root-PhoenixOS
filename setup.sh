@@ -51,7 +51,7 @@ FILE_MD5SUM="$(md5sum $SU/su.zip)"
 if [ "$MD5SUM" != "$FILE_MD5SUM" ]; then echo "$INT File Error..."; exit; fi
 echo "$INT Extracting zip..."
 sleep 0.2
-unzip -qd $SU su.zip 2> /dev/null
+unzip -q su.zip -d $SU 2> /dev/null
 ARCH=$(uname -m)
 if [ $ARCH = x86_64 ]; then _x64; else _x86; fi
 pm install $SU/common/Superuser.apk 2> /dev/null
