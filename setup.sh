@@ -13,26 +13,24 @@ echo "  deace.inc@gmail.com"
 echo "  https://github.com/De4ce/Root-PhoenixOS"
 
 SU=/storage/emulated/0/de4ce
-SUBIN=/system/xbin
+SU_PATH=/system/xbin/su
 INT="   [#]"
 
 _x86 () {
 sleep 0.2
 echo "$INT Installing SuperSU (x86)..."
-cd $SUBIN
-if [ -f su ]; then rm -f su; fi
-cp $SU/x86/su.pie su
-chmod 4751 su
+if [ -f $SU_PATH ]; then rm -f $SU_PATH; fi
+cp $SU/x86/su.pie $SU_PATH
+chmod 4751 $SU_PATH
 su --install
 su --daemon
 }
 _x64 () {
 sleep 0.2
 echo "$INT Installing SuperSU (x64)..."
-cd $SUBIN
-if [ -f su ]; then rm -f su; fi
-cp $SU/x64/su .
-chmod 4751 su
+if [ -f $SU_PATH ]; then rm -f $SU_PATH; fi
+cp $SU/x64/su $SU_PATH
+chmod 4751 $SU_PATH
 su --install
 su --daemon
 }
