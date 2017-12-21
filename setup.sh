@@ -14,6 +14,7 @@ echo "  https://github.com/De4ce/Root-PhoenixOS"
 
 SU=/storage/emulated/0/de4ce
 SU_PATH=/system/xbin/su
+DOWNLOAD_URL="http://phoenix.de4ce.gq/su.zip"
 INT="   [#]"
 
 _x86 () {
@@ -42,7 +43,7 @@ sleep 0.1
 if [ ! -d $SU ]; then echo "$INT Can't create folder, permission denied..."; exit; fi
 echo "$INT Downloading SuperSU, please wait..."
 sleep 0.5
-wget -qP $SU http://phoenix.de4ce.gq/su.zip &> /dev/null
+wget -qP $SU $DOWNLOAD_URL &> /dev/null
 if [ ! -f $SU/su.zip ]; then echo "$INT File not found..."; exit; fi
 MD5SUM="8755c94775431f20bd8de368a2c7a179  $SU/su.zip"
 FILE_MD5SUM="$(md5sum $SU/su.zip)"
