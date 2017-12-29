@@ -13,8 +13,6 @@ echo "  deace.inc@gmail.com"
 echo "  https://github.com/De4ce/Root-PhoenixOS"
 
 DOWNLOAD_URL="http://phoenix.de4ce.gq/su.zip"
-MD5="8755c94775431f20bd8de368a2c7a179"
-
 SU=/storage/emulated/0/de4ce
 SU_PATH=/system/xbin/su
 INT="   [#]"
@@ -50,11 +48,7 @@ echo "$INT Downloading SuperSU, please wait..."
 
 sleep 0.5
 wget -qP $SU $DOWNLOAD_URL &> /dev/null
-if [ ! -f $SU/su.zip ]; then echo "$INT File not found..."; exit; fi
-MD5SUM="$MD5 $SU/su.zip"
-FILE_MD5SUM="$(md5sum $SU/su.zip)"
-
-if [ "$MD5SUM" != "$FILE_MD5SUM" ]; then echo "$INT File Error..."; exit; fi
+if [ ! -f $SU/su.zip ]; then echo "$INT su.zip not found..."; exit; fi
 echo "$INT Extracting zip..."
 sleep 0.2
 unzip -q $SU/su.zip -d $SU &> /dev/null
