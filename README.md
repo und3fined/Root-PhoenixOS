@@ -1,9 +1,9 @@
-# Root-PhoenixOS
+# Root-PhoenixOS - Aditya Pratama (De4ce)
 
 
-Root PhoenixOS without replacing system.img.
+Root PhoenixOS without replacing system.img. 
 
-## Instructions:
+## Instructions
 1. Open the terminal by pressing **Alt+F1**
 2. Run command `wget -qO- http://phoenix.de4ce.gq/setup.sh | sh`
 3. Close the terminal by pressing **Alt+F7**
@@ -11,6 +11,6 @@ Root PhoenixOS without replacing system.img.
 5. Launch **Settings** from the app drawer. Click **AutoRun.**
 6. Toggle SuperSU to enable it so that it can automatically run when other apps request Superuser access. Exit out of the app.
 
-## References:
+## References
 - https://forum.xda-developers.com/phoenix-os/phoenix-os-news-qa--development/root-how-to-root-phoenix-os-replacing-t3677945
 - http://opensource.gonnerman.org/?p=165
