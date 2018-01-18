@@ -68,7 +68,7 @@ if [ ! -d $SU/x86 ]; then echo "$INT Error: Extract failed"; exit; fi
 ARCH=$(uname -m)
 if [ $ARCH = x86_64 ]; then _x64; else _x86; fi
 
-pm install $SU/common/Superuser.apk 2> /dev/null
+pm install $SU/common/Superuser.apk &> /dev/null
 sleep 1
 echo "$INT SuperSU successfully installed."
 rm -rf $SU
