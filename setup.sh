@@ -15,7 +15,7 @@ echo "  https://github.com/De4ce/Root-PhoenixOS"
 DOWNLOAD_URL="http://phoenix.de4ce.gq/su.zip"
 SU="/storage/emulated/0/de4ce"
 SU_PATH="/system/xbin/su"
-INT="   [#]"
+INT="   [#DE4CE] :>"
 
 _install () {
 sleep 0.2
