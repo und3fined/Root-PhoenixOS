@@ -13,25 +13,15 @@ echo "  deace.inc@gmail.com"
 echo "  https://github.com/De4ce/Root-PhoenixOS"
 
 DOWNLOAD_URL="http://phoenix.de4ce.gq/su.zip"
-SU=/storage/emulated/0/de4ce
-SU_PATH=/system/xbin/su
+SU="/storage/emulated/0/de4ce"
+SU_PATH="/system/xbin/su"
 INT="   [#]"
 
-_x86 () {
+_install () {
 sleep 0.2
-echo "$INT Installing SuperSU (x86)"
+echo "$INT Installing SuperSU ($SU_ARCH)..."
 if [ -f $SU_PATH ]; then rm -f $SU_PATH; fi
-cp $SU/x86/su.pie $SU_PATH
-chmod 4751 $SU_PATH
-su --install
-su --daemon
-}
-
-_x64 () {
-sleep 0.2
-echo "$INT Installing SuperSU (x64)"
-if [ -f $SU_PATH ]; then rm -f $SU_PATH; fi
-cp $SU/x64/su $SU_PATH
+if [ $SU_ARCH == "x64"]; then cp $SU/$SU_ARCH/su $SU_PATH; else cp $SU/$SU_ARCH/su.pie $SU_PATH; fi
 chmod 4751 $SU_PATH
 su --install
 su --daemon
@@ -47,7 +37,7 @@ echo
 echo "$INT Preparing..."
 if [ -d $SU ]; then rm -rf $SU; mkdir -p $SU 2> /dev/null; else mkdir -p $SU 2> /dev/null; fi
 
-# cek rw pada system
+sleep 0.2
 check_rw
 
 sleep 0.1
@@ -56,19 +46,19 @@ echo "$INT Downloading SuperSU, please wait..."
 
 sleep 0.5
 wget -qP $SU $DOWNLOAD_URL 2> /dev/null
-if [ ! -f $SU/su.zip ]; then echo "$INT Error: File not found"; exit; fi
+if [ ! -f "$SU/su.zip" ]; then echo "$INT Error: File not found"; exit; fi
 echo "$INT Extracting zip..."
 sleep 0.2
-unzip -q $SU/su.zip -d $SU 2> /dev/null
+unzip -q "$SU/su.zip" -d $SU 2> /dev/null
 
-if [ ! -d $SU/common ]; then echo "$INT Error: Extract failed"; exit; fi
-if [ ! -d $SU/x64 ]; then echo "$INT Error: Extract failed"; exit; fi
-if [ ! -d $SU/x86 ]; then echo "$INT Error: Extract failed"; exit; fi
+if [ ! -d "$SU/common" ]; then echo "$INT Error: Extract failed"; exit; fi
+if [ ! -d "$SU/x64" ]; then echo "$INT Error: Extract failed"; exit; fi
+if [ ! -d "$SU/x86" ]; then echo "$INT Error: Extract failed"; exit; fi
 
 ARCH=$(uname -m)
-if [ $ARCH = x86_64 ]; then _x64; else _x86; fi
-
-pm install $SU/common/Superuser.apk &> /dev/null
+if [ $ARCH = x86_64 ]; then SU_ARCH="x64"; else SU_ARCH="x86"; fi
+_install
+pm install "$SU/common/Superuser.apk" &> /dev/null
 sleep 1
 echo "$INT SuperSU successfully installed."
 rm -rf $SU
