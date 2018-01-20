@@ -45,7 +45,7 @@ if [ "$rw_value" != "1" ]; then echo "$INT Error: Read only file system"; exit; 
 sleep 1.2
 echo
 echo "$INT Preparing..."
-if [ -d $SU ]; then rm -rf $SU; else mkdir -p $SU 2> /dev/null; fi
+if [ -d $SU ]; then rm -rf $SU; mkdir -p $SU 2> /dev/null; else mkdir -p $SU 2> /dev/null; fi
 
 # cek rw pada system
 check_rw
