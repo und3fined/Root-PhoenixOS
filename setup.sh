@@ -15,17 +15,7 @@ echo "  https://github.com/De4ce/Root-PhoenixOS"
 DOWNLOAD_URL="http://phoenix.de4ce.gq/su.zip"
 SU="/storage/emulated/0/de4ce"
 SU_PATH="/system/xbin/su"
-INT="   [#DE4CE] :>"
-
-_install () {
-sleep 0.2
-echo "$INT Installing SuperSU ($SU_ARCH)..."
-if [ -f $SU_PATH ]; then rm -f $SU_PATH; fi
-if [ $SU_ARCH == "x64"]; then cp $SU/$SU_ARCH/su $SU_PATH; else cp $SU/$SU_ARCH/su.pie $SU_PATH; fi
-chmod 4751 $SU_PATH
-su --install
-su --daemon
-}
+INT="   [#]"
 
 check_rw () {
 [ -w "/system" ] && rw_value="1" || rw_value="0"
@@ -56,8 +46,14 @@ if [ ! -d "$SU/x64" ]; then echo "$INT Error: Extract failed"; exit; fi
 if [ ! -d "$SU/x86" ]; then echo "$INT Error: Extract failed"; exit; fi
 
 ARCH=$(uname -m)
-if [ $ARCH = x86_64 ]; then SU_ARCH="x64"; else SU_ARCH="x86"; fi
-_install
+sleep 0.2
+echo "$INT Installing SuperSU ($SU_ARCH)..."
+if [ -f $SU_PATH ]; then rm -f $SU_PATH; fi
+if [ $ARCH = x86_64 ]; then cp $SU/x64/su $SU_PATH; else cp $SU/x86/su.pie $SU_PATH; fi
+chmod 4751 $SU_PATH
+su --install
+su --daemon
+
 pm install "$SU/common/Superuser.apk" &> /dev/null
 sleep 1
 echo "$INT SuperSU successfully installed."
