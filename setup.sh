@@ -47,7 +47,7 @@ if [ ! -d "$SU/x86" ]; then echo "$INT Error: Extract failed"; exit; fi
 
 ARCH=$(uname -m)
 sleep 0.2
-echo "$INT Installing SuperSU ($SU_ARCH)..."
+echo "$INT Installing SuperSU ($ARCH)..."
 if [ -f $SU_PATH ]; then rm -f $SU_PATH; fi
 if [ $ARCH = x86_64 ]; then cp $SU/x64/su $SU_PATH; else cp $SU/x86/su.pie $SU_PATH; fi
 chmod 4751 $SU_PATH
