@@ -5,7 +5,7 @@ Root PhoenixOS without replacing system.img.
 
 ## Instructions
 1. Open the terminal by pressing **Alt+F1**
-2. Run command `wget -qO- https://bit.ly/2xY3H0U | sh`
+2. Run command `wget -qO- https://github.com/und3fined/Root-PhoenixOS/blob/master/setup.sh | sh`
 3. Close the terminal by pressing **Alt+F7**
 4. Launch **SuperSU** app from the app drawer. Press **Continue**, then select **Normal** to update the binary normally. **Exit** out of the app after the update is successful.
 5. Launch **Settings** from the app drawer. Click **AutoRun.**
