@@ -8,12 +8,11 @@ echo "  |  _ < (_) | (_) | |_  |  __/| | | | (_) |  __/ | | | |>  <| |_| |___) |
 echo "  |_| \_\___/ \___/ \__| |_|   |_| |_|\___/ \___|_| |_|_/_/\_\\___/|____/ "
 echo
 sleep 0.2
-echo "  Aditya Pratama (De4ce)"
-echo "  deace.inc@gmail.com"
-echo "  https://github.com/De4ce/Root-PhoenixOS"
+echo "  und3fined"
+echo "  https://github.com/und3fined/Root-PhoenixOS"
 
-DOWNLOAD_URL="http://phoenix.de4ce.gq/su.zip"
-SU="/storage/emulated/0/de4ce"
+DOWNLOAD_URL="https://github.com/und3fined/Root-PhoenixOS/raw/master/su.zip"
+SU="/storage/emulated/0/und3fined"
 SU_PATH="/system/xbin/su"
 INT="   [#]"
 
